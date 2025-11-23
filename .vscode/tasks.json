@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "make: run target",
+      "type": "shell",
+      "command": "make ${input:makeTarget}",
+      "group": "build",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "makeTarget",
+      "type": "pickString",
+      "description": "Select make target",
+      "options": [
+        { "label": "Package", "value": "package" },
+        { "label": "Set up development environment", "value": "develop" },
+        { "label": "Run tests", "value": "test" },
+        { "label": "Run linters", "value": "lint" }
+      ],
+      "default": "build"
+    }
+  ]
+}

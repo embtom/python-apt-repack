@@ -1,0 +1,28 @@
+{
+    "cmake.useCMakePresets": "always",
+    "cmake.options.statusBarVisibility": "visible",
+    "cmake.sourceDirectory": "${workspaceFolder}",
+    "cmake.configureOnOpen": false,
+    "cmake.configureOnEdit": false,
+    "cmake.loadCompileCommands": false,
+    "cmake.skipConfigureIfCachePresent": true,
+    "sonarlint.pathToCompileCommands": "${workspaceFolder}/build/amd64/compile_commands.json",
+    "sonarlint.ls.javaHome": "/usr",
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "[cmake]": {
+        "editor.defaultFormatter": "cheshirekow.cmake-format"
+    },
+    "cmake-format.executable": "cmake-format",
+    "cmake-format.configFile": "${workspaceFolder}/cmake-format.json",
+    "python.pythonPath": "/usr/bin/python3",
+    "python.testing.unittestEnabled": true,
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "tests",
+        "-p",
+        "test_*.py"
+    ]
+}
