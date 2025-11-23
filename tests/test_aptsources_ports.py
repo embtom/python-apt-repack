@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import os
+import pathlib
 import tempfile
 import unittest
 
@@ -13,13 +14,26 @@ import aptsources.sourceslist
 class TestAptSourcesPorts(testcommon.TestCase):
     """Test aptsources on ports.ubuntu.com."""
 
+    def find_build_templates(self, start_path: pathlib.Path) -> pathlib.Path | None:
+        """
+        Recursively search for a 'data/templates' directory below start_dir.
+        Returns the absolute path if found, otherwise None.
+        """
+        for root, _, _ in os.walk(start_path):
+            candidates = os.path.join(root, "data", "templates")
+            if os.path.exists(candidates):
+                return pathlib.Path(candidates)
+        return None
+
     def setUp(self):
         testcommon.TestCase.setUp(self)
         apt_pkg.config.set("APT::Architecture", "powerpc")
         apt_pkg.config.set("Dir::Etc", os.path.abspath("data/aptsources_ports"))
         apt_pkg.config.set("Dir::Etc::sourceparts", tempfile.mkdtemp())
-        if os.path.exists("../build/data/templates"):
-            self.templates = os.path.abspath("../build/data/templates")
+
+        build_templates = self.find_build_templates(pathlib.Path("../build"))
+        if build_templates:
+            self.templates = build_templates
         else:
             self.templates = "/usr/share/python-apt/templates/"
 
