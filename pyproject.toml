@@ -1,0 +1,36 @@
+[project]
+name = "python-apt-repack"
+dynamic = ["version"]
+readme = "README.md"
+requires-python = ">=3.9"
+description = "Unofficial repackaged Debian wheels for python-apt."
+authors = [
+	{ name = "Thomas Willetal", email = "t.willetal@gmail.com" }
+]
+license = { file = "COPYING.GPL" }
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["scikit-build-core>=0.11.1", 
+       "pyflakes>=3.2.0",
+	   "feedparser>=6.0.11"]
+
+[tool.scikit-build]
+cmake.source-dir = "."
+build-dir = "build"
+cmake.build-type = "Debug"
+install.strip = false
+wheel.packages = ["apt", "aptsources"]
+
+[tool.scikit-build.cmake.define]
+CMAKE_EXPORT_COMPILE_COMMANDS = "ON"
+
+[tool.scikit-build.metadata.version]
+provider = "scikit_build_core.metadata.regex"
+input = "debian/changelog"
+regex = '''\A\S+\s\((?P<version>\d+\.\d+\.\d+)'''
+result = "{version}"
+
+[build-system]
+requires = ["scikit-build-core>=0.11.1"]
+build-backend = "scikit_build_core.build"
