@@ -4,23 +4,23 @@ Priority: optional
 Maintainer: APT Development Team <deity@lists.debian.org>
 Uploaders: Michael Vogt <mvo@debian.org>, Julian Andres Klode <jak@debian.org>
 Rules-Requires-Root: no
-Standards-Version: 4.5.0
-Build-Depends: apt (>= 1.0.9.4),
-               apt-utils <!nocheck>,
-               debhelper-compat (= 12),
+Standards-Version: 4.7.2
+Build-Depends: debhelper-compat (= 13),
+               cmake,
                dh-python,
-               distro-info-data <!nocheck>,
-               fakeroot <!nocheck>,
-               libapt-pkg-dev (>= 2.7.11~),
-               python3-all (>= 3.11),
-               python3-all-dev (>= 3.3),
-               python3-distutils-extra (>= 2.0),
-               python3-setuptools,
-               python3-sphinx (>= 0.5),
-               gnupg <!nocheck>,
                dirmngr <!nocheck> | gnupg (<< 2) <!nocheck>,
+               distro-info-data <!nocheck>,
+               gnupg <!nocheck>,
+               libapt-pkg-dev (>= 2.7.11~),
+               ninja-build,
+               pkg-config,
+               pybuild-plugin-pyproject,
                pycodestyle <!nocheck>,
                pyflakes3 <!nocheck>,
+               python3-all (>= 3.11),
+               python3-all-dev (>= 3.3),
+               python3-scikit-build-core,
+               python3-sphinx (>= 0.5)
 Vcs-Git: https://salsa.debian.org/apt-team/python-apt.git
 Vcs-Browser: https://salsa.debian.org/apt-team/python-apt
 

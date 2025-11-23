@@ -10,6 +10,8 @@ export DEB_CFLAGS_MAINT_APPEND=-Wno-write-strings \
                                -DTIME=\""$(TIME)"\"
 export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 export PYBUILD_NAME=apt
+export PYBUILD_SYSTEM=pyproject
+
 
 BUILDDIR3 := $(shell pybuild --print build_dir --interpreter python3)
 
@@ -27,9 +29,8 @@ override_dh_auto_build:
 override_dh_auto_install:
 	dh_auto_install
 	mkdir -p debian/python-apt-common/usr/share/
-	mv debian/python3-apt/usr/share/locale debian/python-apt-common/usr/share/
-	mv debian/python3-apt/usr/share/python-apt debian/python-apt-common/usr/share/
-	rmdir debian/python3-apt/usr/share
+	mv debian/python3-apt/usr/lib/python3.13/dist-packages/share/locale debian/python-apt-common/usr/share/
+	mv debian/python3-apt/usr/lib/python3.13/dist-packages/share/python-apt debian/python-apt-common/usr/share/
 
 override_dh_installdocs:
 	dh_installdocs -p python3-apt --link-doc=python3-apt
