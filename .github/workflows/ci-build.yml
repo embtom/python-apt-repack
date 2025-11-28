@@ -1,0 +1,21 @@
+name: ci-build
+
+on:
+  push:
+    branches: [ embtom/main ]
+  pull_request:
+    branches: [ embtom/main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: hello
+        shell: bash
+        run: echo "hello"
+        
