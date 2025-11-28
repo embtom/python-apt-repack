@@ -1,4 +1,4 @@
-python-apt (3.0.1) unstable; urgency=medium
+python-apt (3.0.1-tdeb13u0) unstable; urgency=medium
 
   * Add scikit-build-core support to enable modern PEP 517/518 builds
   * tests: Improved build-directory discovery when searching for build artifacts
