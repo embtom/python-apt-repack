@@ -20,28 +20,57 @@
 import collections
 import sys
 import urllib.request
+from collections.abc import Iterable
 
 from debian import deb822
 
-mirrors = collections.defaultdict(set)
-masterlist = urllib.request.urlopen(
-    "https://mirror-master.debian.org/" "status/Mirrors.masterlist"
-)
 
-for mirror in deb822.Deb822.iter_paragraphs(masterlist):
-    if "Country" not in mirror:
-        continue
-    country = mirror["Country"].split(None, 1)[0]
-    site = mirror["Site"]
-    for proto in "http", "ftp":
-        if "Archive-%s" % proto in mirror:
-            mirrors[country].add(
-                "{}://{}{}".format(proto, site, mirror["Archive-%s" % proto])
-            )
+def main() -> int:
+    """
+    Main function to parse the Debian mirrors
+    """
+    try:
+        masterlist = urllib.request.urlopen(
+            "https://mirror-master.debian.org/status/Mirrors.masterlist"
+        )
+    except Exception as e:
+        sys.stderr.write(f"E: Could not retrieve Mirrors.masterlist: {e}\n")
+        return 1
 
-if len(mirrors) == 0:
-    sys.stderr.write("E: Could not read the mirror list due to " "some unknown issue\n")
-    sys.exit(1)
-for country in sorted(mirrors):
-    print("#LOC:%s" % country)
-    print("\n".join(sorted(mirrors[country])))
+    mirror_map: dict[str, set[str]] = collections.defaultdict(set)
+
+    mirrors: Iterable[deb822.Deb822] = deb822.Deb822.iter_paragraphs(masterlist)
+    for mirror in mirrors:
+        country_field = mirror.get("country")
+        if not country_field:
+            continue
+
+        country = country_field.split(None, 1)[0]
+
+        site = mirror.get("site")
+        if not site:
+            continue
+
+        for proto in ("http", "ftp"):
+            key = f"archive-{proto}"
+            path = mirror.get(key)
+
+            if path:
+                url = f"{proto}://{site}{path}"
+                mirror_map[country].add(url)
+
+    # error if nothing parsed
+    if not mirror_map:
+        sys.stderr.write("E: Could not read any mirrors from the master list\n")
+        return 1
+
+    # output mirrors sorted by country
+    for country in sorted(mirror_map):
+        print(f"#LOC:{country}")
+        print("\n".join(sorted(mirror_map[country])))
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

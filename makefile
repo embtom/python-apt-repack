@@ -26,7 +26,7 @@ lint:
 
 test:
 	@echo "==> Running tests"all: develop lint test package
-	python3 -m unittest discover -s tests -p "test_*.py"
+	@$(ROOT)/utils/test_runner.py
 
 clean:
 	@echo "==> Cleaning build artifacts"
