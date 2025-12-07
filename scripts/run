@@ -1,0 +1,17 @@
+#!/bin/bash
+
+TOPDIR="$(git rev-parse --show-toplevel)"
+IMAGE_NAME="python-apt-builder:dev"
+BUILDER=$(command -v podman || command -v docker)
+if [[ -z "$BUILDER" ]]; then
+    echo "Error: Neither podman nor docker is installed." >&2
+    exit 1
+fi
+
+$BUILDER run \
+  --interactive \
+  --tty \
+  --volume $TOPDIR:$TOPDIR \
+  --workdir $TOPDIR \
+  "${IMAGE_NAME}"
+  

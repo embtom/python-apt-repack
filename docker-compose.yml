@@ -1,0 +1,49 @@
+version: "4"
+
+services:
+  builder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build-env
+    platform: linux/amd64
+    image: python-apt-builder-amd64:latest
+    volumes:
+      - .:/src:Z
+    working_dir: "/src"
+    network_mode: host
+    environment:
+      - ARCH=amd64
+      - INSIDE_CONTAINER=1
+    entrypoint: ["dumb-init", "--", "make"]
+
+  builder-arm64:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build-env
+    platform: linux/arm64
+    image: python-apt-builder-arm64:latest
+    volumes:
+      - .:/src:Z
+    working_dir: "/src"
+    network_mode: host
+    environment:
+      - ARCH=arm64
+      - INSIDE_CONTAINER=1
+    entrypoint: ["dumb-init", "--", "make"]
+
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev-env
+    platform: linux/amd64
+    image: python-apt-devcontainer:latest
+    volumes:
+      - .:/src:Z
+    network_mode: host
+    environment:
+      - ARCH=amd64
+      - INSIDE_CONTAINER=1
+    entrypoint: ["dumb-init", "--", "sleep", "infinity"]

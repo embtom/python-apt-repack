@@ -9,13 +9,60 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - platform: linux-amd64
+            arch: amd64
+            runner: ubuntu-24.04
+            service: builder
+          - platform: linux-arm64
+            arch: arm64
+            runner: ubuntu-24.04-arm
+            service: builder-arm64
+
+    runs-on: ${{ matrix.runner }}
+    permissions: 
+      packages: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: hello
-        shell: bash
-        run: echo "hello"
-        
+      - name: Get Debian version
+        id: changelog
+        uses: ./.github/actions/get-deb-version
+        with:
+          path: "."
+
+      - name: Show parsed version
+        run: echo Version=${{ steps.changelog.outputs.version }}
+
+      - name: Prepare build environment
+        uses: ./.github/actions/prepare-builder
+        with:
+          service: ${{ matrix.service }}
+
+      - name: Build wheel
+        uses: ./.github/actions/run-build
+        with:
+          service: ${{ matrix.service }}
+          build-target: all
+
+      - name: Build Debian package
+        uses: ./.github/actions/run-build
+        with:
+          service: ${{ matrix.service }}
+          build-target: build-deb
+
+      - name: Upload artifacts
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.platform }}-${{ steps.changelog.outputs.version }}
+          path: |
+            build/*.deb
+            build/*.changes
+            build/*.buildinfo
+            dist/*.whl
+          retention-days: 10

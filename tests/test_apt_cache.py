@@ -8,6 +8,7 @@
 # notice and this notice are preserved.
 """Unit tests for verifying the correctness of check_dep, etc in apt_pkg."""
 
+import gc
 import glob
 import logging
 import os
@@ -93,11 +94,16 @@ class TestAptCache(testcommon.TestCase):
         self.assertEqual(unclosed_fd, set())
 
     def test_cache_open_twice_leaks_fds(self):
+        gc.collect()  # clean up any unreferenced objects
+        fds_before = get_open_file_descriptors()
         cache = apt.Cache()
-        fds_before_open = get_open_file_descriptors()
         cache.open()
-        fds_after_open_twice = get_open_file_descriptors()
-        self.assertEqual(fds_before_open, fds_after_open_twice)
+        cache.open()
+        cache.close()
+        fds_after = get_open_file_descriptors()
+        self.assertEqual(
+            fds_before, fds_after, "FD leak detected after opening cache twice"
+        )
 
     @if_sources_list_is_readable
     def test_cache_close_download_fails(self):

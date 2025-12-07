@@ -1,3 +1,11 @@
+python-apt (3.0.1-tdeb13u0) unstable; urgency=medium
+
+  * Add scikit-build-core support to enable modern PEP 517/518 builds
+  * tests: Improved build-directory discovery when searching for build artifacts
+  * tests: Fix FD leak detection in test_cache_open_twice by ensuring proper cleanup and validation
+
+ -- Thomas Willetal <t.willetal@googlemail.com>  Sun, 23 Nov 2025 12:08:28 +0100
+
 python-apt (3.0.0) unstable; urgency=medium
 
   * Bump version to 3.0.0 to match APT and indicate stable series
