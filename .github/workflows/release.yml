@@ -1,0 +1,76 @@
+name: release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+  packages: write
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get version from changelog
+        id: changelog
+        uses: ./.github/actions/get-deb-version
+        with:
+          path: "."
+
+      - name: Download linux-amd64 artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: ci-build.yml
+          workflow_conclusion: success
+          branch: embtom/main
+          name: build-linux-amd64-${{ steps.changelog.outputs.version }}
+          path: ./artifacts/linux-amd64
+
+      - name: Download linux-arm64 artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: ci-build.yml
+          workflow_conclusion: success
+          branch: embtom/main
+          name: build-linux-arm64-${{ steps.changelog.outputs.version }}
+          path: ./artifacts/linux-arm64
+
+      - name: List downloaded files
+        run: |
+          echo "Artifacts downloaded:"
+          find artifacts -type f -print
+
+      - name: Publish wheel to GitHub PyPI
+        run: |
+          pip install twine
+
+          # Create .pypirc
+          cat > ~/.pypirc <<EOF
+          [distutils]
+          index-servers =
+              github
+
+          [github]
+          repository = https://pypi.pkg.github.com/${{ github.repository_owner }}
+          username = __token__
+          password = ${{ secrets.GITHUB_TOKEN }}
+          EOF
+
+          # Upload wheels from artifacts
+          twine upload --repository github artifacts/**/*.whl
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.changelog.outputs.version }}
+          name: Release v${{ steps.changelog.outputs.version }}
+          files: |
+            artifacts/linux-amd64/**
+            artifacts/linux-arm64/**
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
