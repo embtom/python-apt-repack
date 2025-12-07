@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   release:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-24.04
 
     steps:
@@ -21,6 +22,8 @@ jobs:
         uses: ./.github/actions/get-deb-version
         with:
           path: "."
+
+          
 
       - name: Download linux-amd64 artifact
         uses: dawidd6/action-download-artifact@v2
@@ -43,34 +46,32 @@ jobs:
       - name: List downloaded files
         run: |
           echo "Artifacts downloaded:"
-          find artifacts -type f -print
+          find artifacts -type f -exec readlink -f {} \;
 
-      - name: Publish wheel to GitHub PyPI
+      - name: Prepare version tag
+        id: prepare-tag
         run: |
-          pip install twine
-
-          # Create .pypirc
-          cat > ~/.pypirc <<EOF
-          [distutils]
-          index-servers =
-              github
-
-          [github]
-          repository = https://pypi.pkg.github.com/${{ github.repository_owner }}
-          username = __token__
-          password = ${{ secrets.GITHUB_TOKEN }}
-          EOF
-
-          # Upload wheels from artifacts
-          twine upload --repository github artifacts/**/*.whl
+          VERSION="${{ steps.changelog.outputs.version }}"
+          VERSION="embtom-${VERSION%%-*}"
+          echo "Prepared version: ${VERSION}"
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+      
+      - name: Create zip archives
+        shell: bash
+        run: |
+          for ARCH in linux-amd64 linux-arm64; do
+            echo "Zipping $ARCH..."
+            zip -r "artifacts/${ARCH}-debian.zip" "artifacts/${ARCH}/build"
+          done
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ steps.changelog.outputs.version }}
-          name: Release v${{ steps.changelog.outputs.version }}
+          tag_name: ${{ steps.prepare-tag.outputs.version }}
+          name: Release ${{ steps.prepare-tag.outputs.version }}
           files: |
-            artifacts/linux-amd64/**
-            artifacts/linux-arm64/**
+            artifacts/linux-amd64/dist/**
+            artifacts/linux-arm64/dist/**
+            artifacts/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
