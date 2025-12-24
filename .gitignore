@@ -30,5 +30,6 @@ poetry.lock
 # pytest
 .cache/
 .pytest_cache/
+**/junit/*
 
 

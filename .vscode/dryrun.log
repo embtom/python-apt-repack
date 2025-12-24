@@ -1,0 +1,7 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/mnt/data_storage/1_Development/1_devenv/python-apt-repack'
+BASE=all ; \
+echo ">>> Running inside ARM64 builder: $BASE" ; \
+podman-compose -f docker-compose.yml run --rm builder-arm64 $BASE
+make: Leaving directory '/mnt/data_storage/1_Development/1_devenv/python-apt-repack'
+ 

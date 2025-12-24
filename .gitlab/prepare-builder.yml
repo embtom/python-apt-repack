@@ -1,0 +1,50 @@
+.prepare_builder_template:
+  before_script:
+    - |
+      echo -n $CI_JOB_TOKEN | podman login \
+        -u $CI_REGISTRY_USER \
+        --password-stdin $CI_REGISTRY
+
+  script:
+    - |
+      set -eu
+
+      # Read image from compose
+      IMAGE=$(yq -r ".services.\"$SERVICE\".image" docker-compose.yml)
+
+      # Strip tag or digest safely
+      BASE_IMAGE=${IMAGE%@*}
+      BASE_IMAGE=${BASE_IMAGE%:*}
+
+      # Content hash (cache key)
+      HASH=$(sha256sum Dockerfile | cut -d ' ' -f1)
+
+      # Cache image
+      CACHE_IMAGE_PATH="$CI_REGISTRY_IMAGE/cache-${BASE_IMAGE##*/}"
+      CACHE_IMAGE="$CACHE_IMAGE_PATH:$HASH"
+
+      echo "Checking cache image: $CACHE_IMAGE"
+
+      if podman pull "$CACHE_IMAGE" >/dev/null; then
+        echo "Cache image exists"
+        CACHE_HIT=true
+      else
+        echo "Cache image does not exist -> building"
+        CACHE_HIT=false
+
+        podman-compose -f docker-compose.yml build "$SERVICE"
+        podman tag "$IMAGE" "$CACHE_IMAGE"
+        podman push "$CACHE_IMAGE"
+      fi
+
+      mkdir -p artifacts
+      {
+        echo "SERVICE=$SERVICE"
+        echo "IMAGE=$IMAGE"
+        echo "CACHE_IMAGE=$CACHE_IMAGE"
+        echo "CACHE_HIT=$CACHE_HIT"
+        echo "HASH=$HASH"
+      } > artifacts/build-${SERVICE}.env
+  artifacts:
+    paths:
+      - artifacts/

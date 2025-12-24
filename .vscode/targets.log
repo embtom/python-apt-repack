@@ -1,0 +1,465 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.4.1
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2023 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Tue Dec 30 08:54:18 2025
+
+# Variables
+
+# environment
+GDK_BACKEND = wayland
+# environment
+MEMORY_PRESSURE_WRITE = c29tZSAyMDAwMDAgMjAwMDAwMAA=
+# environment
+LC_ALL = C
+# environment
+GTK_RC_FILES = /etc/gtk/gtkrc:/home/thomas/.gtkrc:/home/thomas/.config/gtkrc
+# environment
+VSCODE_CRASH_REPORTER_PROCESS_TYPE = extensionHost
+# environment
+VSCODE_CWD = /mnt/data_storage/8_AI_course
+# default
+MAKE_COMMAND := make
+# environment
+APPLICATIONINSIGHTS_CONFIGURATION_CONTENT = {}
+# environment
+QT_ACCESSIBILITY = 1
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# environment
+PWD = /mnt/data_storage/1_Development/1_devenv/python-apt-repack
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_CODE_CACHE_PATH = /home/thomas/.config/Code/CachedData/994fd12f8d3a5aa16f17d42c041e5809167e845a
+# environment
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session1
+# environment
+LANG = C
+# environment
+XAUTHORITY = /run/user/10000/xauth_yoPEfm
+# default
+.LOADED := 
+# default
+.INCLUDE_DIRS := /usr/local/include /usr/include
+# environment
+MEMORY_PRESSURE_WATCH = /sys/fs/cgroup/user.slice/user-10000.slice/user@10000.service/background.slice/plasma-dolphin.service/memory.pressure
+# makefile
+MAKEFLAGS = pqrR
+# makefile
+CURDIR := /mnt/data_storage/1_Development/1_devenv/python-apt-repack
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+VSCODE_L10N_BUNDLE_LOCATION = 
+# environment
+ICEAUTHORITY = /run/user/10000/iceauth_pJiuIw
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+PAM_KWALLET5_LOGIN = /run/user/10000/kwallet5.socket
+# environment
+MFLAGS = -pqrR
+# environment
+SSH_AUTH_SOCK = /run/user/10000/openssh_agent
+# default
+.SHELLFLAGS := -c
+# environment
+WAYLAND_DISPLAY = wayland-0
+# environment
+XDG_CONFIG_DIRS = /home/thomas/.config/kdedefaults:/etc/xdg:/usr/share/desktop-base/kf5-settings
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+XDG_SESSION_DESKTOP = KDE
+# makefile (from 'makefile', line 1)
+MAKEFILE_LIST := makefile
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_PID = 372562
+# environment
+XDG_SESSION_TYPE = wayland
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+SESSION_MANAGER = local/saturn:@/tmp/.ICE-unix/2348,unix/saturn:/tmp/.ICE-unix/2348
+# automatic
+*F = $(notdir $*)
+# environment
+XKB_DEFAULT_MODEL = pc105
+# environment
+CHROME_DESKTOP = code.desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/10000/bus
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"userLocale":"en-gb","osLocale":"en-gb","resolvedLanguage":"en","defaultMessagesFile":"/usr/share/code/resources/app/out/nls.messages.json","locale":"en-gb","availableLanguages":{}}
+# environment
+XKB_DEFAULT_OPTIONS = terminate:ctrl_alt_bksp
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# makefile
+SHELL = /bin/sh
+# default
+MAKECMDGOALS := all
+# environment
+XMODIFIERS = @im=ibus
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = /home/thomas/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+# default
+MAKEFILES := 
+# environment
+LANGUAGE = en_GB:de_DE
+# automatic
+^F = $(notdir $^)
+# makefile (from 'makefile', line 1)
+ROOT := /mnt/data_storage/1_Development/1_devenv/python-apt-repack/
+# environment
+APPLICATION_INSIGHTS_NO_STATSBEAT = true
+# environment
+INVOCATION_ID = 3c3a5a4a8dfc453c9cfbab1253376323
+# automatic
+?F = $(notdir $?)
+# environment
+KDE_APPLICATIONS_AS_SCOPE = 1
+# environment
+XDG_SEAT = seat0
+# environment
+GTK_IM_MODULE = ibus
+# environment
+XDG_CURRENT_DESKTOP = KDE
+# automatic
++F = $(notdir $+)
+# environment
+XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
+# environment
+DESKTOP_SESSION = plasma
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+CLUTTER_IM_MODULE = ibus
+# environment
+LOGNAME = thomas
+# environment
+XDG_VTNR = 1
+# makefile
+.DEFAULT_GOAL := all-arm64
+# environment
+SYSTEMD_EXEC_PID = 35764
+# environment
+DISPLAY = :1
+# environment
+USER = thomas
+# environment
+GTK_MODULES = gail:atk-bridge
+# default
+MAKE_VERSION := 4.4.1
+# environment
+KDE_SESSION_UID = 10000
+ 
+# environment
+MANAGERPID = 2078
+# environment
+XKB_DEFAULT_LAYOUT = de
+# environment
+XDG_RUNTIME_DIR = /run/user/10000
+# environment
+GPG_AGENT_INFO = /run/user/10000/gnupg/S.gpg-agent:0:1
+# environment
+FC_FONTATIONS = 1
+# environment
+JOURNAL_STREAM = 9:2728689
+# environment
+XDG_SESSION_CLASS = user
+# environment
+GTK2_RC_FILES = /etc/gtk-2.0/gtkrc:/home/thomas/.gtkrc-2.0:/home/thomas/.config/gtkrc-2.0
+# environment
+HOME = /home/thomas
+# environment
+QT_IM_MODULE = ibus
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+VSCODE_IPC_HOOK = /run/user/10000/vscode-f561e2ba-1.10-main.sock
+# environment
+XDG_SESSION_ID = 5
+# environment
+IM_CONFIG_PHASE = 1
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# default
+SUFFIXES := 
+# environment
+QT_AUTO_SCREEN_SCALE_FACTOR = 0
+# environment
+VSCODE_CLI = 1
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+KDE_SESSION_VERSION = 6
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs notintermediate shell-export archives jobserver jobserver-fifo output-sync check-symlink load
+# environment
+KDE_FULL_SESSION = true
+# environment
+XDG_MENU_PREFIX = plasma-
+# environment
+VSCODE_ESM_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+QT_WAYLAND_RECONNECT = 1
+# variable set hash-table stats:
+# Load=108/1024=11%, Rehash=0, Collisions=5/142=4%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 91, inode 9376816): 39 files, no impossibilities.
+
+# 39 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+clean-arm64:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 57):
+	@BASE=$(@:%-arm64=%) ; \
+	echo ">>> Running inside ARM64 builder: $$BASE" ; \
+	podman-compose -f docker-compose.yml run --rm builder-arm64 $$BASE
+
+package-arm64:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 57):
+	@BASE=$(@:%-arm64=%) ; \
+	echo ">>> Running inside ARM64 builder: $$BASE" ; \
+	podman-compose -f docker-compose.yml run --rm builder-arm64 $$BASE
+
+package:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 62):
+	@echo ">>> Running inside native builder: $@" ; \
+	podman-compose -f docker-compose.yml run --rm builder $@
+
+lint:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 62):
+	@echo ">>> Running inside native builder: $@" ; \
+	podman-compose -f docker-compose.yml run --rm builder $@
+
+lint-arm64:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 57):
+	@BASE=$(@:%-arm64=%) ; \
+	echo ">>> Running inside ARM64 builder: $$BASE" ; \
+	podman-compose -f docker-compose.yml run --rm builder-arm64 $$BASE
+
+develop-arm64:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 57):
+	@BASE=$(@:%-arm64=%) ; \
+	echo ">>> Running inside ARM64 builder: $$BASE" ; \
+	podman-compose -f docker-compose.yml run --rm builder-arm64 $$BASE
+
+test-arm64:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 57):
+	@BASE=$(@:%-arm64=%) ; \
+	echo ">>> Running inside ARM64 builder: $$BASE" ; \
+	podman-compose -f docker-compose.yml run --rm builder-arm64 $$BASE
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 62):
+	@echo ">>> Running inside native builder: $@" ; \
+	podman-compose -f docker-compose.yml run --rm builder $@
+
+develop:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 62):
+	@echo ">>> Running inside native builder: $@" ; \
+	podman-compose -f docker-compose.yml run --rm builder $@
+
+builder-arm64:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 69):
+	podman-compose -f docker-compose.yml build builder-arm64
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all:
+#  Command line target.
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := all
+# automatic
+# * := 
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+ 
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
+#  recipe to execute (from 'makefile', line 62):
+	@echo ">>> Running inside native builder: $@" ; \
+	podman-compose -f docker-compose.yml run --rm builder $@
+
+prepare:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+build-deb-arm64:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 57):
+	@BASE=$(@:%-arm64=%) ; \
+	echo ">>> Running inside ARM64 builder: $$BASE" ; \
+	podman-compose -f docker-compose.yml run --rm builder-arm64 $$BASE
+
+test:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 62):
+	@echo ">>> Running inside native builder: $@" ; \
+	podman-compose -f docker-compose.yml run --rm builder $@
+
+builder:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 66):
+	podman-compose -f docker-compose.yml build builder
+
+# Not a target:
+makefile:
+#  Implicit rule search has been done.
+#  File is secondary (prerequisite of .SECONDARY).
+#  Last modified 2025-12-07 15:13:31.19196044
+#  File has been updated.
+#  Successfully updated.
+
+build-deb:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 62):
+	@echo ">>> Running inside native builder: $@" ; \
+	podman-compose -f docker-compose.yml run --rm builder $@
+
+all-arm64:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 57):
+	@BASE=$(@:%-arm64=%) ; \
+	echo ">>> Running inside ARM64 builder: $$BASE" ; \
+	podman-compose -f docker-compose.yml run --rm builder-arm64 $$BASE
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+.PHONY: prepare package package-arm64 build-deb build-deb-arm64 develop develop-arm64 lint lint-arm64 test test-arm64 clean clean-arm64 builder builder-arm64
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=21/1024=2%, Rehash=0, Collisions=1/63=2%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 61 / storage = 585 B / avg = 9 B
+# current buf: size = 8162 B / used = 585 B / count = 61 / avg = 9 B
+
+# strcache performance: lookups = 97 / hit rate = 37%
+# hash-table stats:
+# Load=61/8192=1%, Rehash=0, Collisions=0/97=0%
+# Finished Make data base on Tue Dec 30 08:54:18 2025
+
+ 

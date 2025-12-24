@@ -38,6 +38,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python3-pip \
         python3-scikit-build-core \
         python3-sphinx \
+        python3-xmlrunner \
         rsync \
         ssh \
     && apt-get clean \
