@@ -1,0 +1,20 @@
+.build_template:
+  before_script:
+    - |
+      echo -n $CI_JOB_TOKEN | podman login \
+        -u $CI_REGISTRY_USER \
+        --password-stdin $CI_REGISTRY
+  script:
+    - |
+      set -eu
+      source artifacts/build-${SERVICE}.env
+      echo "IMAGE=$IMAGE"
+      echo "CACHE_IMAGE=$CACHE_IMAGE"
+      echo "HASH=$HASH"
+      podman pull "$CACHE_IMAGE"     
+      podman tag "$CACHE_IMAGE" "$IMAGE"
+      VERSION=$(dpkg-parsechangelog --show-field Version)
+      echo $VERSION
+
+      podman-compose -f docker-compose.yml \
+            run --rm "$SERVICE" $TARGET

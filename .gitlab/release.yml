@@ -1,0 +1,18 @@
+.release_template:
+  script:
+    - |
+        VERSION=$(dpkg-parsechangelog --show-field Version)
+        release-cli create ${CI_PROJECT_PATH} \
+          --ref ${CI_COMMIT_SHA} \
+          --name "Release ${VERSION}" \
+          --tag-name "embtom/v${VERSION}" \
+          --description "Automated release of version ${VERSION}"
+    - |
+        ls -l dist/*
+        TWINE_USERNAME=gitlab-ci-token \
+        TWINE_PASSWORD=${CI_JOB_TOKEN} \
+        python3 -m twine upload \
+          --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi \
+          --non-interactive \
+          --disable-progress-bar \
+          dist/*

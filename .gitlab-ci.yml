@@ -1,25 +1,81 @@
-image: debian:unstable
-variables:
-  DEBIAN_FRONTEND: noninteractive
-pre-commit:
-  script:
-    - apt update
-    - apt install -q -y pre-commit git
-    - pre-commit run -a --show-diff-on-failure
-test:
-  script:
-    - apt update
-    - apt build-dep -q -y ./
-    - dpkg-buildpackage
-  artifacts:
-    paths:
-      - build/sphinx/html/
-pages:
-  stage: deploy
-  script:
-    - mv build/sphinx/html/ public
-  artifacts:
-    paths:
-      - public
+spec:
+  inputs:
+    release_it:
+      type: boolean
+      description: "Enable release build"
+      default: false
+---
+
+workflow:
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+
+stages:
+  - prepare
+  - test
+  - build
+  - publish
+  - release
+
+include:
+  - local: .gitlab/prepare-builder.yml
+  - local: .gitlab/build.yml
+  - local: .gitlab/release.yml
+
+prepare-builder:
+  stage: prepare
+  extends: .prepare_builder_template
+  parallel:
+    matrix:
+      - SERVICE: builder
+      - SERVICE: builder-arm64
+  variables:
+    JOB_NAME: "prepare-${SERVICE}"
+
+test:
+  stage: test
+  extends: .build_template
+  parallel:
+    matrix:
+      - SERVICE: builder
+        TARGET: "develop lint test"
+  dependencies:
+    - prepare-builder
+  artifacts:
+    when: always
+    reports:
+      junit: junit/TEST-*.xml
+
+build:
+  stage: build
+  extends: .build_template
+  parallel:
+    matrix:
+      - SERVICE: builder
+        TARGET: "package"
+      - SERVICE: builder-arm64
+        TARGET: "package"
+  dependencies:
+    - prepare-builder
+  artifacts:
+    name: "build-${CI_JOB_NAME}-${VERSION}"
+    paths:
+      - build/*.deb
+      - build/*.changes
+      - build/*.buildinfo
+      - dist/*.whl
+    expire_in: 10 days
+
+release:
+  stage: release
+  extends: .release_template
+  needs:
+    - job: build
+      artifacts: true
+  rules:
+    - if: >
+        $CI_PIPELINE_SOURCE == "web" &&
+        $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH &&
+        "$[[ inputs.release_it ]]" == "true"
