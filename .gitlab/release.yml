@@ -2,8 +2,8 @@
   script:
     - |
         VERSION=$(dpkg-parsechangelog --show-field Version)
-        release-cli create ${CI_PROJECT_PATH} \
-          --ref ${CI_COMMIT_SHA} \
+        release-cli create \
+          --ref "${CI_COMMIT_SHA}" \
           --name "Release ${VERSION}" \
           --tag-name "embtom/v${VERSION}" \
           --description "Automated release of version ${VERSION}"
